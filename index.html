@@ -1,100 +1,134 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      background-image: url('https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/Wooden%20Bridge.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      text-align: center;
-      font-family: sans-serif;
-      margin: 0;
-      padding-top: 50px;
-      min-height: 100vh;
-    }
+<style>
+body {
+  background-image: url('https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/Wooden%20Bridge.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+  font-family: sans-serif;
+  margin: 0;
+  padding-top: 50px;
+  min-height: 100vh;
+}
 
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.4);
-      z-index: -1;
-    }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  z-index: -1;
+}
 
-    .buttons {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 30px;
-      animation: fadeIn 1.2s ease forwards;
-    }
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  animation: fadeIn 1.2s ease forwards;
+}
 
-    .link-img {
-      width: 200px;
-      max-width: 85vw;
-      cursor: pointer;
-      transition: transform 0.2s ease, filter 0.2s ease;
-    }
+.link-img {
+  width: 200px;
+  max-width: 85vw;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
 
-    /* Tap feedback */
-    .link-img:active {
-      transform: scale(0.92);
-      filter: brightness(1.1);
-    }
+/* Desktop hover — simple and clean */
+@media (hover: hover) {
+  .link-img:hover {
+    transform: scale(1.08);
+  }
+}
 
-    /* Mobile-only motion */
-    @media (max-width: 600px) {
-      .link-img {
-        width: 300px;
-        animation: float 3s ease-in-out infinite;
-      }
+/* Tap feedback (mobile) */
+.link-img:active {
+  transform: scale(0.92);
+  filter: brightness(1.1);
+}
 
-      .buttons {
-        gap: 42px;
-      }
-    }
+/* Mobile-only motion */
+@media (max-width: 600px) {
+  .link-img {
+    width: 300px;
+    animation: float1 5s ease-in-out infinite;
+  }
 
-    /* Stronger floating animation */
-    @keyframes float {
-      0%   { transform: translateY(0); }
-      50%  { transform: translateY(-12px); }
-      100% { transform: translateY(0); }
-    }
+  /* Each button gets its own motion */
+  .buttons a:nth-child(1) .link-img {
+    animation: float1 5s ease-in-out infinite;
+  }
 
-    /* Fade-in on load */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-  </style>
+  .buttons a:nth-child(2) .link-img {
+    animation: float2 6.5s ease-in-out infinite;
+  }
+
+  .buttons a:nth-child(3) .link-img {
+    animation: float3 7.5s ease-in-out infinite;
+  }
+
+  .buttons {
+    gap: 42px;
+  }
+}
+
+/* Floating animations (up/down + left/right) */
+@keyframes float1 {
+  0%   { transform: translate(0, 0); }
+  50%  { transform: translate(-8px, -12px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes float2 {
+  0%   { transform: translate(0, 0); }
+  50%  { transform: translate(10px, -10px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes float3 {
+  0%   { transform: translate(0, 0); }
+  50%  { transform: translate(-6px, -14px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Fade-in on load */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+</style>
 </head>
 
 <body>
-  <div class="buttons">
-    <a href="https://soundcloud.com/lumnya" target="_blank">
-      <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/Walkman.png"
-           class="link-img"
-           alt="SoundCloud">
-    </a>
+<div class="buttons">
 
-    <a href="https://www.instagram.com/lumnya2" target="_blank">
-      <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/Daisy.png"
-           class="link-img"
-           alt="Instagram">
-    </a>
+  <a href="https://soundcloud.com/lumnya" target="_blank">
+    <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/Walkman.png"
+         class="link-img"
+         alt="SoundCloud">
+  </a>
 
-    <a href="mailto:lumnya@outlook.de">
-      <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/Rosary.PNG"
-           class="link-img"
-           alt="Email">
-    </a>
-  </div>
+  <a href="https://www.instagram.com/lumnya2" target="_blank">
+    <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/Daisy.png"
+         class="link-img"
+         alt="Instagram">
+  </a>
+
+  <a href="mailto:lumnya@outlook.de">
+    <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/Rosary.PNG"
+         class="link-img"
+         alt="Email">
+  </a>
+
+</div>
 </body>
 </html>
 
