@@ -46,14 +46,33 @@
       transform: scale(1.08);
     }
 
-    /* Mobile-only styles */
+    /* Tap feedback for mobile */
+    .link-img:active {
+      transform: scale(0.96);
+    }
+
+    /* Mobile-only styles + animation */
     @media (max-width: 600px) {
       .link-img {
         width: 300px;
+        animation: float 4s ease-in-out infinite;
       }
 
       .buttons {
         gap: 40px;
+      }
+    }
+
+    /* Floating animation */
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+      100% {
+        transform: translateY(0);
       }
     }
   </style>
@@ -63,20 +82,24 @@
   <div class="buttons">
     <!-- SoundCloud -->
     <a href="https://soundcloud.com/lumnya" target="_blank">
-      <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/Walkman.png" class="link-img" alt="SoundCloud">
+      <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/Walkman.png"
+           class="link-img"
+           alt="SoundCloud">
     </a>
 
     <!-- Instagram -->
     <a href="https://www.instagram.com/lumnya2" target="_blank">
-      <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/Daisy.png" class="link-img" alt="Instagram">
+      <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/Daisy.png"
+           class="link-img"
+           alt="Instagram">
     </a>
 
     <!-- Email -->
     <a href="mailto:lumnya@outlook.de">
-      <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/Rosary.PNG" class="link-img" alt="Email">
+      <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/Rosary.PNG"
+           class="link-img"
+           alt="Email">
     </a>
   </div>
 </body>
 </html>
-
-
