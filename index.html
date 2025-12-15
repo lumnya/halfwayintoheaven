@@ -19,6 +19,7 @@
       position: relative;
     }
 
+    /* Dark overlay */
     body::before {
       content: "";
       position: fixed;
@@ -38,36 +39,31 @@
       width: 200px;
       max-width: 85vw;
       cursor: pointer;
-      /* Desktop hover effect */
       transition: transform 0.15s ease, filter 0.15s ease;
     }
 
-    /* Desktop hover */
-    @media(min-width:601px) {
-      .link-img:hover {
-        transform: scale(1.05);
-      }
-      .link-img:active {
-        transform: scale(0.9);
-        filter: brightness(1.15);
-      }
+    /* Desktop hover exactly like original */
+    .link-img:hover {
+      transform: scale(1.05);
+    }
+    .link-img:active {
+      transform: scale(0.9);
+      filter: brightness(1.15);
     }
 
-    /* Mobile sizing */
     @media (max-width: 600px) {
       .link-img {
         width: 300px;
       }
     }
 
-    /* Mobile animation class */
+    /* Mobile animation */
     .mobile-animate {
       opacity: 0;
       transform: translateY(20px);
       animation: fadeSlideUp 0.6s ease forwards;
     }
 
-    /* Staggered delays for mobile buttons */
     .mobile-animate:nth-child(1) { animation-delay: 0.2s; }
     .mobile-animate:nth-child(2) { animation-delay: 0.5s; }
     .mobile-animate:nth-child(3) { animation-delay: 0.8s; }
@@ -76,13 +72,6 @@
       to {
         opacity: 1;
         transform: translateY(0);
-      }
-    }
-
-    /* Mobile hover effect — staggered slightly for natural feel */
-    @media(max-width:600px) {
-      .link-img:hover {
-        /* will be overridden by JS with random hover effect */
       }
     }
   </style>
@@ -109,34 +98,14 @@
   </div>
 
   <script>
-    const buttons = document.querySelectorAll('.link-img');
-
+    // Mobile-only fade/slide animation
     if (window.innerWidth <= 600) {
-      // Mobile: add fade-slide animation
-      buttons.forEach((btn, index) => {
+      const buttons = document.querySelectorAll('.link-img');
+      buttons.forEach((btn) => {
         btn.classList.add('mobile-animate');
-
-        // Mobile hover effect — staggered/unique
-        const scaleMin = 1.03;
-        const scaleMax = 1.08;
-        const brightnessMin = 1.05;
-        const brightnessMax = 1.15;
-
-        btn.addEventListener('mouseenter', () => {
-          const scale = (Math.random() * (scaleMax - scaleMin) + scaleMin).toFixed(2);
-          const brightness = (Math.random() * (brightnessMax - brightnessMin) + brightnessMin).toFixed(2);
-          btn.style.transform = `scale(${scale})`;
-          btn.style.filter = `brightness(${brightness})`;
-        });
-
-        btn.addEventListener('mouseleave', () => {
-          btn.style.transform = 'scale(1)';
-          btn.style.filter = 'brightness(1)';
-        });
       });
-    } else {
-      // Desktop hover effect handled purely by CSS
     }
   </script>
 </body>
 </html>
+
