@@ -1,30 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       background-image: url('https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/Wooden%20Bridge.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      margin: 0;
-      min-height: 100vh;
+      text-align: center;
       font-family: sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding-top: 60px;
-      position: relative;
+      margin: 0;
+      padding-top: 50px;
+      min-height: 100vh;
     }
 
-    /* Dark overlay */
     body::before {
       content: "";
       position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.4);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.4);
       z-index: -1;
     }
 
@@ -32,50 +31,50 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 32px;
+      gap: 30px;
+      animation: fadeIn 1.2s ease forwards;
     }
 
     .link-img {
       width: 200px;
       max-width: 85vw;
       cursor: pointer;
-      transition: transform 0.15s ease, filter 0.15s ease;
+      transition: transform 0.2s ease, filter 0.2s ease;
     }
 
-    /* Desktop hover exactly like original */
-    .link-img:hover {
-      transform: scale(1.05);
-    }
+    /* Tap feedback */
     .link-img:active {
-      transform: scale(0.9);
-      filter: brightness(1.15);
+      transform: scale(0.92);
+      filter: brightness(1.1);
     }
 
+    /* Mobile-only motion */
     @media (max-width: 600px) {
       .link-img {
         width: 300px;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .buttons {
+        gap: 42px;
       }
     }
 
-    /* Mobile animation */
-    .mobile-animate {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeSlideUp 0.6s ease forwards;
+    /* Stronger floating animation */
+    @keyframes float {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-12px); }
+      100% { transform: translateY(0); }
     }
 
-    .mobile-animate:nth-child(1) { animation-delay: 0.2s; }
-    .mobile-animate:nth-child(2) { animation-delay: 0.5s; }
-    .mobile-animate:nth-child(3) { animation-delay: 0.8s; }
-
-    @keyframes fadeSlideUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    /* Fade-in on load */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
     }
   </style>
 </head>
+
 <body>
   <div class="buttons">
     <a href="https://soundcloud.com/lumnya" target="_blank">
@@ -96,16 +95,6 @@
            alt="Email">
     </a>
   </div>
-
-  <script>
-    // Mobile-only fade/slide animation
-    if (window.innerWidth <= 600) {
-      const buttons = document.querySelectorAll('.link-img');
-      buttons.forEach((btn) => {
-        btn.classList.add('mobile-animate');
-      });
-    }
-  </script>
 </body>
 </html>
 
