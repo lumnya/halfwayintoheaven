@@ -42,6 +42,11 @@ body::before {
   transition: transform 0.25s ease, filter 0.25s ease;
 }
 
+/* 🌸 Flowercrown icon — 45% bigger (desktop) */
+.big-icon {
+  width: 290px;
+}
+
 /* ✅ Desktop hover only */
 @media (hover: hover) and (pointer: fine) {
   .link-img:hover {
@@ -59,6 +64,11 @@ body::before {
 @media (max-width: 600px) {
   .link-img {
     width: 300px;
+  }
+
+  /* 🌸 Flowercrown icon — 45% bigger (mobile) */
+  .big-icon {
+    width: 435px;
   }
 
   .buttons a:nth-child(1) .link-img {
@@ -116,7 +126,7 @@ body::before {
 
   <a href="https://www.instagram.com/lumnya2" target="_blank">
     <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/Flowercrown.PNG"
-         class="link-img"
+         class="link-img big-icon"
          alt="Instagram">
   </a>
 
@@ -126,7 +136,6 @@ body::before {
          alt="Email">
   </a>
 
-  <!-- NEW: YouTube button -->
   <a href="https://www.youtube.com/@Lumnya2" target="_blank">
     <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/Casette.png"
          class="link-img"
@@ -136,4 +145,3 @@ body::before {
 </div>
 </body>
 </html>
-
