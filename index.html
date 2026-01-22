@@ -212,6 +212,7 @@
       100%{transform:translateX(-35%);opacity:.08;}
     }
 
+    /* 🔧 MOBILE TUNING */
     @media(max-width:420px){
       .name-gif{
         width: clamp(160px, 62vw, 320px);
@@ -226,16 +227,17 @@
         height:36px;
       }
 
+      /* SoundCloud: big but not stretched */
       .icon-link.sc .icon{
         width:36px;
         height:36px;
-        background-size:135% 135%;
+        background-size:125% 140%;
       }
 
       .icon-link.sc .icon::before,
       .icon-link.sc .icon::after{
-        -webkit-mask-size:135% 135%;
-        mask-size:135% 135%;
+        -webkit-mask-size:125% 140%;
+        mask-size:125% 140%;
       }
     }
 
@@ -284,4 +286,3 @@
   </main>
 </body>
 </html>
-
