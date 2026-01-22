@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lumnya</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
-
   <style>
     :root{
       --pink:#E474CD;
+
+      /* Your glitter file */
+      --glitter: url("https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/glitter.GIF");
     }
 
     *{ box-sizing:border-box; }
@@ -90,24 +89,24 @@
       100% { transform: translateX(-20%) translateY(-10%); opacity:.2; }
     }
 
-.name{
-  display:flex;
-  justify-content:center;
-  margin-bottom:28px;
-  user-select:none;
-}
+    /* ===== Name GIF ===== */
+    .name{
+      display:flex;
+      justify-content:center;
+      margin-bottom:28px;
+      user-select:none;
+    }
 
-.name-gif{
-  width: clamp(180px, 46vw, 520px);
-  height: auto;
-  display:block;
-  filter:
-    drop-shadow(0 2px 18px rgba(228,116,205,.45))
-    drop-shadow(0 0 22px rgba(255,255,255,.25));
-}
+    .name-gif{
+      width: clamp(180px, 46vw, 520px);
+      height: auto;
+      display:block;
+      filter:
+        drop-shadow(0 2px 18px rgba(228,116,205,.45))
+        drop-shadow(0 0 22px rgba(255,255,255,.25));
+    }
 
-
-    /* ===== Icons ===== */
+    /* ===== Icons layout ===== */
     .icons{
       display:flex;
       gap:clamp(22px,4vw,44px);
@@ -126,21 +125,82 @@
       transform:translateY(-2px);
     }
 
-    .icon-link img{
+    /* ===== Glitter-masked icon element (keeps original proportions) ===== */
+    .icon{
       width:42px;
-      height:auto;
+      height:42px;
       display:block;
+      position:relative;
+
+      /* Base PNG */
+      background-image: var(--icon);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+
       filter:
         drop-shadow(0 0 10px rgba(255,255,255,.35))
         drop-shadow(0 0 18px rgba(255,255,255,.18));
     }
 
-    /* SoundCloud bigger */
-    .icon-link.sc img{
-      width:67px;
+    /* Pink tint layer under glitter, masked to the icon */
+    .icon::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: var(--pink);
+      opacity: .9;            /* lower = softer pink */
+      pointer-events:none;
+
+      -webkit-mask-image: var(--icon);
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      -webkit-mask-size: contain;
+
+      mask-image: var(--icon);
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: contain;
     }
 
-    /* gentle shine pass on icons */
+    /* SoundCloud bigger (same as before) */
+    .icon-link.sc .icon{
+      width:67px;
+      height:67px;
+    }
+
+    /* Glitter overlay, masked to icon PNG (more see-through so pink shows through) */
+    .icon::after{
+      content:"";
+      position:absolute;
+      inset:0;
+
+      background-image: var(--glitter);
+      background-size: 240% 240%;
+      background-position: 0% 50%;
+      opacity: .45;                 /* <- more transparent */
+      mix-blend-mode: screen;
+      pointer-events:none;
+
+      -webkit-mask-image: var(--icon);
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      -webkit-mask-size: contain;
+
+      mask-image: var(--icon);
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: contain;
+
+      animation: glitterFlow 2.2s linear infinite;
+    }
+
+    @keyframes glitterFlow{
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    /* Gentle shine pass on icons */
     .icon-link::after{
       content:"";
       position:absolute;
@@ -152,27 +212,36 @@
         transparent 55%
       );
       filter: blur(6px);
-      opacity:.25;
+      opacity:.22;
       mix-blend-mode: screen;
       animation: iconShine 10s ease-in-out infinite;
       pointer-events:none;
     }
 
     @keyframes iconShine{
-      0%   { transform: translateX(-35%); opacity:.1; }
-      50%  { transform: translateX( 35%); opacity:.35; }
-      100% { transform: translateX(-35%); opacity:.1; }
+      0%   { transform: translateX(-35%); opacity:.08; }
+      50%  { transform: translateX( 35%); opacity:.28; }
+      100% { transform: translateX(-35%); opacity:.08; }
     }
 
     @media(max-width:420px){
-      .icon-link img{ width:36px; }
-      .icon-link.sc img{ width:50px; }
+      .name-gif{
+        width: clamp(160px, 62vw, 320px);
+      }
+      .icon{
+        width:36px;
+        height:36px;
+      }
+      .icon-link.sc .icon{
+        width:50px;
+        height:50px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce){
       .glimmer::before,
       .glimmer::after,
-      .name::after,
+      .icon::after,
       .icon-link::after{
         animation:none;
       }
@@ -184,34 +253,33 @@
   <div class="glimmer" aria-hidden="true"></div>
 
   <main class="wrap">
-<div class="name">
-  <img class="name-gif"
-       src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/lumnya.GIF"
-       alt="Lumnya">
-</div>
+    <div class="name">
+      <img class="name-gif"
+           src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/lumnya.GIF"
+           alt="Lumnya">
+    </div>
 
     <nav class="icons" aria-label="Social links">
-      <a class="icon-link sc" href="https://soundcloud.com/lumnya" target="_blank" rel="noopener">
-        <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/scicon.PNG" alt="SoundCloud">
+      <a class="icon-link sc" href="https://soundcloud.com/lumnya" target="_blank" rel="noopener" aria-label="SoundCloud">
+        <span class="icon" style="--icon:url('https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/scicon.PNG')"></span>
       </a>
 
-      <a class="icon-link" href="https://open.spotify.com/intl-de/artist/6SQuzrnL9TNuc5pMv41RFq?si=gNr8Jb2dTli17umeQ1Y1zA" target="_blank" rel="noopener">
-        <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/spotifyicon.PNG" alt="Spotify">
+      <a class="icon-link" href="https://open.spotify.com/intl-de/artist/6SQuzrnL9TNuc5pMv41RFq?si=gNr8Jb2dTli17umeQ1Y1zA" target="_blank" rel="noopener" aria-label="Spotify">
+        <span class="icon" style="--icon:url('https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/spotifyicon.PNG')"></span>
       </a>
 
-      <a class="icon-link" href="https://www.youtube.com/@Lumnya2" target="_blank" rel="noopener">
-        <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/youtubeicon.PNG" alt="YouTube">
+      <a class="icon-link" href="https://www.youtube.com/@Lumnya2" target="_blank" rel="noopener" aria-label="YouTube">
+        <span class="icon" style="--icon:url('https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/youtubeicon.PNG')"></span>
       </a>
 
-      <a class="icon-link" href="https://www.instagram.com/lumnya2" target="_blank" rel="noopener">
-        <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/igicon.PNG" alt="Instagram">
+      <a class="icon-link" href="https://www.instagram.com/lumnya2" target="_blank" rel="noopener" aria-label="Instagram">
+        <span class="icon" style="--icon:url('https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/igicon.PNG')"></span>
       </a>
 
-      <a class="icon-link" href="mailto:lumnya@outlook.de">
-        <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/emailicon.PNG" alt="Email">
+      <a class="icon-link" href="mailto:lumnya@outlook.de" aria-label="Email">
+        <span class="icon" style="--icon:url('https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/emailicon.PNG')"></span>
       </a>
     </nav>
   </main>
 </body>
 </html>
-
