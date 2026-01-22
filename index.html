@@ -213,7 +213,7 @@
     }
 
     /* 🔧 MOBILE TUNING */
-    @media(max-width:420px){
+    @media (max-width: 520px){
       .name-gif{
         width: clamp(160px, 62vw, 320px);
       }
@@ -228,17 +228,19 @@
       }
 
       /* SoundCloud: big but not stretched */
-      .icon-link.sc .icon{
-        width:36px;
-        height:36px;
-        background-size:125% 140%;
-      }
+.icon-link.sc .icon{
+  width:36px;
+  height:36px;
 
-      .icon-link.sc .icon::before,
-      .icon-link.sc .icon::after{
-        -webkit-mask-size:125% 140%;
-        mask-size:125% 140%;
-      }
+  /* less horizontal stretch, more vertical */
+  background-size:125% 140%;
+}
+
+.icon-link.sc .icon::before,
+.icon-link.sc .icon::after{
+  -webkit-mask-size:125% 140%;
+  mask-size:125% 140%;
+}
     }
 
     @media (prefers-reduced-motion: reduce){
