@@ -212,8 +212,7 @@
       100%{transform:translateX(-35%);opacity:.08;}
     }
 
-    /* 🔧 MOBILE TUNING */
-    @media (max-width: 520px){
+    @media(max-width:420px){
       .name-gif{
         width: clamp(160px, 62vw, 320px);
       }
@@ -227,20 +226,17 @@
         height:36px;
       }
 
-      /* SoundCloud: big but not stretched */
-.icon-link.sc .icon{
-  width:36px;
-  height:36px;
+      .icon-link.sc .icon{
+        width:36px;
+        height:36px;
+        background-size:135% 135%;
+      }
 
-  /* less horizontal stretch, more vertical */
-  background-size:125% 140%;
-}
-
-.icon-link.sc .icon::before,
-.icon-link.sc .icon::after{
-  -webkit-mask-size:125% 140%;
-  mask-size:125% 140%;
-}
+      .icon-link.sc .icon::before,
+      .icon-link.sc .icon::after{
+        -webkit-mask-size:135% 135%;
+        mask-size:135% 135%;
+      }
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -266,7 +262,7 @@
 
     <nav class="icons" aria-label="Social links">
       <a class="icon-link sc" href="https://soundcloud.com/lumnya" target="_blank" rel="noopener" aria-label="SoundCloud">
-        <span class="icon" style="--icon:url('https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/scicon.PNG')"></span>
+        <span class="icon" style="--icon:url('https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/scicon2.PNG')"></span>
       </a>
 
       <a class="icon-link" href="https://open.spotify.com/intl-de/artist/6SQuzrnL9TNuc5pMv41RFq?si=gNr8Jb2dTli17umeQ1Y1zA" target="_blank" rel="noopener" aria-label="Spotify">
