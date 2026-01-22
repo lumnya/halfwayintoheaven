@@ -8,8 +8,6 @@
   <style>
     :root{
       --pink:#E474CD;
-
-      /* Your glitter file */
       --glitter: url("https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/glitter.GIF");
     }
 
@@ -30,14 +28,12 @@
       overscroll-behavior:none;
     }
 
-    /* Keep content above overlays */
     .wrap{
       text-align:center;
       position: relative;
       z-index: 2;
     }
 
-    /* ===== Ethereal background shimmer ===== */
     .glimmer{
       position: fixed;
       inset: 0;
@@ -78,18 +74,17 @@
     }
 
     @keyframes veilDrift{
-      0%   { transform: translate(-1%, -1%) scale(1.02); opacity:.7; }
-      50%  { transform: translate( 1%,  1%) scale(1.05); opacity:.95; }
-      100% { transform: translate(-1%, -1%) scale(1.02); opacity:.7; }
+      0%{transform:translate(-1%,-1%) scale(1.02);opacity:.7;}
+      50%{transform:translate(1%,1%) scale(1.05);opacity:.95;}
+      100%{transform:translate(-1%,-1%) scale(1.02);opacity:.7;}
     }
 
     @keyframes shimmerSweep{
-      0%   { transform: translateX(-20%) translateY(-10%); opacity:.2; }
-      50%  { transform: translateX( 20%) translateY( 10%); opacity:.6; }
-      100% { transform: translateX(-20%) translateY(-10%); opacity:.2; }
+      0%{transform:translateX(-20%) translateY(-10%);opacity:.2;}
+      50%{transform:translateX(20%) translateY(10%);opacity:.6;}
+      100%{transform:translateX(-20%) translateY(-10%);opacity:.2;}
     }
 
-    /* ===== Name GIF ===== */
     .name{
       display:flex;
       justify-content:center;
@@ -99,14 +94,13 @@
 
     .name-gif{
       width: clamp(180px, 46vw, 520px);
-      height: auto;
+      height:auto;
       display:block;
       filter:
         drop-shadow(0 2px 18px rgba(228,116,205,.45))
         drop-shadow(0 0 22px rgba(255,255,255,.25));
     }
 
-    /* ===== Icons layout ===== */
     .icons{
       display:flex;
       gap:clamp(22px,4vw,44px);
@@ -119,88 +113,82 @@
       display:inline-block;
       position:relative;
       transition:transform .15s ease;
+      -webkit-tap-highlight-color: transparent;
+      tap-highlight-color: transparent;
+      outline:none;
     }
 
     .icon-link:hover{
       transform:translateY(-2px);
     }
 
-    /* ===== Glitter-masked icon element (keeps original proportions) ===== */
+    .icon-link:focus,
+    .icon-link:active{
+      outline:none;
+    }
+
     .icon{
       width:42px;
       height:42px;
       display:block;
       position:relative;
-
-      /* Base PNG */
       background-image: var(--icon);
       background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-
+      background-repeat:no-repeat;
+      background-position:center;
       filter:
         drop-shadow(0 0 10px rgba(255,255,255,.35))
         drop-shadow(0 0 18px rgba(255,255,255,.18));
     }
 
-    /* Pink tint layer under glitter, masked to the icon */
     .icon::before{
       content:"";
       position:absolute;
       inset:0;
       background: var(--pink);
-      opacity: .9;            /* lower = softer pink */
+      opacity:.9;
       pointer-events:none;
-
       -webkit-mask-image: var(--icon);
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: center;
-      -webkit-mask-size: contain;
-
+      -webkit-mask-repeat:no-repeat;
+      -webkit-mask-position:center;
+      -webkit-mask-size:contain;
       mask-image: var(--icon);
-      mask-repeat: no-repeat;
-      mask-position: center;
-      mask-size: contain;
+      mask-repeat:no-repeat;
+      mask-position:center;
+      mask-size:contain;
     }
 
-    /* SoundCloud bigger (same as before) */
     .icon-link.sc .icon{
       width:67px;
       height:67px;
     }
 
-    /* Glitter overlay, masked to icon PNG (more see-through so pink shows through) */
     .icon::after{
       content:"";
       position:absolute;
       inset:0;
-
       background-image: var(--glitter);
-      background-size: 240% 240%;
-      background-position: 0% 50%;
-      opacity: .45;                 /* <- more transparent */
-      mix-blend-mode: screen;
+      background-size:240% 240%;
+      background-position:0% 50%;
+      opacity:.45;
+      mix-blend-mode:screen;
       pointer-events:none;
-
       -webkit-mask-image: var(--icon);
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: center;
-      -webkit-mask-size: contain;
-
+      -webkit-mask-repeat:no-repeat;
+      -webkit-mask-position:center;
+      -webkit-mask-size:contain;
       mask-image: var(--icon);
-      mask-repeat: no-repeat;
-      mask-position: center;
-      mask-size: contain;
-
+      mask-repeat:no-repeat;
+      mask-position:center;
+      mask-size:contain;
       animation: glitterFlow 2.2s linear infinite;
     }
 
     @keyframes glitterFlow{
-      0%   { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
+      0%{background-position:0% 50%;}
+      100%{background-position:100% 50%;}
     }
 
-    /* Gentle shine pass on icons */
     .icon-link::after{
       content:"";
       position:absolute;
@@ -213,15 +201,15 @@
       );
       filter: blur(6px);
       opacity:.22;
-      mix-blend-mode: screen;
+      mix-blend-mode:screen;
       animation: iconShine 10s ease-in-out infinite;
       pointer-events:none;
     }
 
     @keyframes iconShine{
-      0%   { transform: translateX(-35%); opacity:.08; }
-      50%  { transform: translateX( 35%); opacity:.28; }
-      100% { transform: translateX(-35%); opacity:.08; }
+      0%{transform:translateX(-35%);opacity:.08;}
+      50%{transform:translateX(35%);opacity:.28;}
+      100%{transform:translateX(-35%);opacity:.08;}
     }
 
     @media(max-width:420px){
@@ -229,9 +217,8 @@
         width: clamp(160px, 62vw, 320px);
       }
 
-      /* ONLY change: more space between icons on mobile */
       .icons{
-        gap: 28px;
+        gap:28px;
       }
 
       .icon{
@@ -239,10 +226,16 @@
         height:36px;
       }
 
-      /* ONLY change: SoundCloud more proportional on mobile */
       .icon-link.sc .icon{
-        width:44px;
-        height:44px;
+        width:36px;
+        height:36px;
+        background-size:135% 135%;
+      }
+
+      .icon-link.sc .icon::before,
+      .icon-link.sc .icon::after{
+        -webkit-mask-size:135% 135%;
+        mask-size:135% 135%;
       }
     }
 
@@ -291,3 +284,4 @@
   </main>
 </body>
 </html>
+
