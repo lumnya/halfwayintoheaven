@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumnya</title>
+<link rel="icon" href="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/KISS.PNG" type="image/png">
+
+<style>
+  :root {
+    --bg: #0b1411;
+    --accent: #FF95CA;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: var(--bg);
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background-image: url("https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/1.png");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    z-index: -2;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.12);
+
+    z-index: -1;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .brand {
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo {
+    width: 520px;
+    max-width: 75vw;
+    height: auto;
+    display: block;
+    pointer-events: none;
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.6));
+  }
+
+  nav {
+    position: relative;
+    z-index: 11;
+    margin-top: -3rem;
+    margin-left: 2.3rem;
+    text-align: left;
+  }
+
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav li {
+    margin: 0.55rem 0;
+  }
+
+  nav a,
+  nav a:visited {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-shadow:
+      0 0 6px rgba(0,0,0,0.7),
+      0 0 14px rgba(0,0,0,0.5);
+    transition: opacity 0.25s ease, letter-spacing 0.25s ease;
+  }
+
+  nav a:hover,
+  nav a:visited:hover {
+    opacity: 0.7;
+    letter-spacing: 0.24em;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .kiss-flash {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .kiss-flash img {
+    max-width: 42vw;
+    max-height: 42vh;
+    opacity: 0;
+    filter: drop-shadow(0 0 20px rgba(0,0,0,0.6));
+  }
+
+  .kiss-flash.show img {
+    animation: kissFlash 1.3s ease-in-out;
+  }
+
+  @keyframes kissFlash {
+    0%   { opacity: 0; }
+    12%  { opacity: 1; }
+    27%  { opacity: 0; }
+    42%  { opacity: 1; }
+    58%  { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  .since {
+    position: fixed;
+    bottom: 1.7rem;
+    right: 1.7rem;
+    z-index: 10;
+    font-family: "Times New Roman", serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    color: var(--accent);
+    opacity: 0.55;
+    text-shadow: 0 0 6px rgba(0,0,0,0.7);
+    text-align: right;
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    nav li {
+      margin: 0.6rem 0;
+    }
+
+    nav a {
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+    }
+
+    .logo {
+      width: 280px;
+    }
+
+    .since {
+      font-size: 0.7rem;
+      bottom: 1rem;
+      right: 1rem;
+    }
+
+    body::after {
+      background: rgba(0, 0, 0, 0.16);
+    }
+  }
+</style>
+</head>
+
+<body>
+<div class="since" id="since"></div>
+
+<div class="brand">
+  <img class="logo" src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/LUMNYA.png" alt="Lumnya">
+  <nav>
+    <ul>
+      <li><a href="https://soundcloud.com/lumnya">SoundCloud</a></li>
+      <li><a href="https://open.spotify.com/intl-de/artist/6SQuzrnL9TNuc5pMv41RFq">Spotify</a></li>
+      <li><a href="https://youtube.com/@eternalspringmaid">YouTube</a></li>
+      <li><a href="https://lumnya.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a></li>
+      <li><a href="https://www.instagram.com/eternalspringmaid/">Instagram</a></li>
+      <li><a href="mailto:lumnya@outlook.de">Contact</a></li>
+      <li><a href="ora.html" id="heart-link">♡</a></li>
+    </ul>
+  </nav>
+</div>
+
+<div class="kiss-flash" id="kiss-flash">
+  <img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/KISS.PNG" alt="">
+</div>
+
+<script>
+  document.getElementById('heart-link').addEventListener('click', function (e) {
+    e.preventDefault();
+    var destination = this.getAttribute('href');
+    var flash = document.getElementById('kiss-flash');
+    flash.classList.add('show');
+    setTimeout(function () {
+      window.location.href = destination;
+    }, 1300);
+  });
+
+  (function () {
+    try {
+      var key = 'lumnya_first_visit';
+      var stored = localStorage.getItem(key);
+      if (!stored) {
+        stored = new Date().toISOString();
+        localStorage.setItem(key, stored);
+      }
+      var date = new Date(stored);
+      var formatted = date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      document.getElementById('since').textContent = 'here since ' + formatted;
+    } catch (e) {
+    }
+  })();
+</script>
+</body>
+</html>
