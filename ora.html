@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eternal Spring</title>
+<link rel="icon" href="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/KISS.PNG" type="image/png">
+<style>
+html,
+body{
+background:#000;
+margin:0;
+padding:0;
+}
+body{
+font-family:Times New Roman;
+color:#FF95CA;
+}
+img{
+width:560px;
+display:block;
+margin-top:110px;
+margin-left:90px;
+}
+.letter{
+position:absolute;
+right:120px;
+top:140px;
+width:330px;
+font-family:"Times New Roman", serif;
+font-size:18px;
+line-height:1.7;
+color:#FF95CA;
+}
+.big{
+position:absolute;
+bottom:35px;
+left:35px;
+font-family:Times New Roman;
+font-size:145px;
+font-weight:900;
+letter-spacing:3px;
+color:#d98aab;
+text-transform:uppercase;
+}
+.small{
+position:absolute;
+left:15px;
+top:10px;
+font-family:"Times New Roman", serif;
+font-style:italic;
+font-size:20px;
+color:#FF95CA;
+}
+a{
+color:#FF95CA;
+text-decoration:none;
+}
+.hidden-link{
+cursor:default;
+}
+.hidden-link.active{
+cursor:pointer;
+}
+.hidden-link.active:hover{
+text-decoration:underline;
+text-underline-offset:3px;
+opacity:0.85;
+}
+
+@media (max-width: 768px) {
+  img {
+    width: 88%;
+    max-width: 420px;
+    margin: 90px auto 0;
+  }
+  .letter {
+    position: static;
+    width: 88%;
+    max-width: 500px;
+    margin: 30px auto 60px;
+    right: auto;
+    top: auto;
+  }
+  .small {
+    font-size: 17px;
+  }
+}
+</style>
+</head>
+<body>
+<div class="small">
+Halfway Into Heaven
+</div>
+<img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/4.png">
+<div class="letter">
+"This birth is always happening."<br><br>
+
+Most people live by the seasons of circumstance.<br><br>
+
+But the person remembering has gotten <b>o</b>utside the <span class="songlink" id="river" data-href="">river</span> of living time.<br>
+They exist, but do not inhabit their existence.<br>
+It is said<br>:"They have lost contact with life."</b><br><br>
+
+<span style="font-size:26px;font-family:Arial,sans-serif;font-weight:900;">WHEN ARE YOU REALLY ALIVE?</span><br><br>
+
+<i>now</i> is dead;<br>
+
+spring is always happening.<br><br><br>
+
+
+</div>
+
+<script>
+  (function () {
+    var egg = document.getElementById('river');
+    var url = egg.getAttribute('data-href');
+    if (url) {
+      egg.classList.add('active');
+      egg.addEventListener('click', function () {
+        window.open(url, '_blank', 'noopener');
+      });
+    }
+  })();
+
+  (function () {
+    function setFavicon(href) {
+      var old = document.querySelectorAll("link[rel*='icon']");
+      for (var i = 0; i < old.length; i++) {
+        old[i].parentNode.removeChild(old[i]);
+      }
+      var link = document.createElement('link');
+      link.rel = 'icon';
+      link.type = 'image/png';
+      link.href = href;
+      document.head.appendChild(link);
+    }
+
+    var img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = function () {
+      var size = 64;
+      var canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      var ctx = canvas.getContext('2d');
+
+      var totalFrames = 14;
+      var frame = 0;
+      var maxOffset = 16;
+      var trailCount = 6;
+
+      function drawFrame() {
+        var progress = frame / totalFrames;
+        var offset = maxOffset * progress;
+
+        ctx.clearRect(0, 0, size, size);
+        for (var i = trailCount; i >= 0; i--) {
+          var t = i / trailCount;
+          ctx.globalAlpha = (1 - t) * 0.9;
+          ctx.drawImage(img, offset * t, offset * t * 0.15, size, size);
+        }
+        ctx.globalAlpha = 1;
+
+        try {
+          setFavicon(canvas.toDataURL('image/png'));
+        } catch (e) {
+          return;
+        }
+
+        frame++;
+        if (frame <= totalFrames) {
+          setTimeout(drawFrame, 80);
+        }
+      }
+
+      drawFrame();
+    };
+    img.onerror = function () {};
+    img.src = 'https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/KISS.PNG';
+  })();
+</script>
+</body>
+</html>
