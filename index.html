@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0b1411">
 <title>Lumnya</title>
 <link rel="icon" href="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/KISS.PNG" type="image/png">
 
@@ -162,27 +163,99 @@
   }
 
   @media (max-width: 768px) {
-    nav li {
-      margin: 0.6rem 0;
+    body::after {
+      background: rgba(0, 0, 0, 0.1);
     }
 
-    nav a {
-      font-size: 0.85rem;
-      letter-spacing: 0.14em;
+    .brand {
+      top: 0;
+      left: 0;
+      padding-top: calc(env(safe-area-inset-top, 0px) + 1.5rem);
+      padding-left: calc(env(safe-area-inset-left, 0px) + 1.4rem);
+    }
+
+    :root {
+      --logo-drop: 11vh;
     }
 
     .logo {
-      width: 280px;
+      width: min(300px, 78vw);
+      margin-top: var(--logo-drop);
+    }
+
+    nav {
+      margin-top: calc(clamp(2.5rem, 13vh, 6.5rem) - var(--logo-drop));
+      margin-left: 1.1rem;
+      padding-left: 1.2rem;
+      border-left: 1px solid rgba(255, 149, 202, 0.4);
+    }
+
+    nav li {
+      margin: 0;
+    }
+
+    nav a,
+    nav a:visited {
+      display: inline-block;
+      padding: 0.8rem 0;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      transition: opacity 0.2s ease;
+    }
+
+    nav a:hover,
+    nav a:visited:hover {
+      opacity: 1;
+      letter-spacing: 0.2em;
+      text-decoration: none;
+    }
+
+    nav a:active {
+      opacity: 0.55;
+    }
+
+    nav li:last-child a {
+      font-size: 1.6rem;
+      line-height: 1;
+      padding: 0.9rem 1.2rem 0.9rem 0;
+      letter-spacing: 0;
     }
 
     .since {
-      font-size: 0.7rem;
-      bottom: 1rem;
-      right: 1rem;
+      font-size: 0.78rem;
+      opacity: 0.75;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 1.1rem);
+      right: calc(env(safe-area-inset-right, 0px) + 1.1rem);
     }
 
-    body::after {
-      background: rgba(0, 0, 0, 0.16);
+    .kiss-flash img {
+      max-width: 62vw;
+    }
+  }
+
+  @media (max-width: 768px) and (orientation: portrait) {
+    body::before {
+      background-image: url("https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/1mobile.jpg");
+      background-position: center center;
+    }
+  }
+
+  @media (max-width: 768px), (max-height: 560px) {
+    .brand {
+      bottom: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: none;
+      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 1.5rem);
+    }
+
+    .brand::-webkit-scrollbar {
+      display: none;
+    }
+
+    .brand > * {
+      flex-shrink: 0;
     }
   }
 </style>
