@@ -68,6 +68,28 @@ text-underline-offset:3px;
 opacity:0.85;
 }
 
+#photo{
+-webkit-tap-highlight-color:transparent;
+-webkit-user-select:none;
+user-select:none;
+touch-action:manipulation;
+}
+#timeflash{
+display:none;
+position:fixed;
+z-index:50;
+text-align:center;
+pointer-events:none;
+font-family:"Times New Roman", serif;
+font-style:italic;
+font-size:22px;
+letter-spacing:0.04em;
+color:#FF95CA;
+opacity:0.4;
+text-shadow:0 0 8px rgba(0,0,0,0.8);
+transform:translateY(-50%);
+}
+
 @media (max-width: 768px) {
   img {
     width: 88%;
@@ -85,6 +107,9 @@ opacity:0.85;
   .small {
     font-size: 17px;
   }
+  #timeflash {
+    font-size: 19px;
+  }
 }
 </style>
 </head>
@@ -92,7 +117,8 @@ opacity:0.85;
 <div class="small">
 Halfway Into Heaven
 </div>
-<img src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/4.png">
+<img id="photo" src="https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/4.png">
+<div id="timeflash">How to make time stop?</div>
 <div class="letter">
 "This birth is always happening."<br><br>
 
@@ -178,6 +204,46 @@ spring is always happening.<br><br><br>
     };
     img.onerror = function () {};
     img.src = 'https://raw.githubusercontent.com/lumnya/halfwayintoheaven/main/KISS.PNG';
+  })();
+
+  (function () {
+    var img = document.getElementById('photo');
+    var flash = document.getElementById('timeflash');
+    var key = 'lumnya_time_stop_seen';
+    var last = 0;
+    var done = false;
+
+    try {
+      if (localStorage.getItem(key)) done = true;
+    } catch (e) {}
+
+    function fire() {
+      done = true;
+      try { localStorage.setItem(key, '1'); } catch (e) {}
+
+      var r = img.getBoundingClientRect();
+      var top = Math.max(r.top, 0);
+      var bottom = Math.min(r.bottom, window.innerHeight);
+      flash.style.left = r.left + 'px';
+      flash.style.width = r.width + 'px';
+      flash.style.top = ((top + bottom) / 2) + 'px';
+      flash.style.display = 'block';
+
+      setTimeout(function () {
+        flash.style.display = 'none';
+      }, 700);
+    }
+
+    img.addEventListener('click', function () {
+      if (done) return;
+      var now = Date.now();
+      if (now - last < 450) {
+        last = 0;
+        fire();
+      } else {
+        last = now;
+      }
+    });
   })();
 </script>
 </body>
